@@ -1,68 +1,52 @@
-import React, { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Home from './pages/Home.jsx'
-import Contact from './pages/Contact.jsx'
-import ShopContextProvider from './context/ShopContext.jsx'
-import Collection from './pages/Collection.jsx'
-import About from './pages/About.jsx'
-import Product from './pages/Product.jsx'
-import Cart from './pages/Cart.jsx'
-import Login from './pages/Login.jsx'
-import PlaceOrder from './pages/PlaceOrder.jsx'
-import Orders from './pages/Orders.jsx'
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import Dashboard from './pages/Dashboard';
+import AllRecords from './pages/AllRecords';
+import UserRecords from './pages/UserRecords';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        path: '/',
+        element: <LandingPage />,
       },
       {
-        path: "/collection",
-        element: <Collection />,
+        path: '/login',
+        element: <LoginPage />,
       },
       {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/product/:productId",
-        element: <Product />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/place-order",
-        element: <PlaceOrder />,
-      },
-      {
-        path: "/orders",
-        element: <Orders />,
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
+        path: '/admin',
+        element: <LandingPage />,
+        children: [
+          {
+            path: 'dashboard',
+            element: <Dashboard />,
+          },
+          {
+            path: 'all-records',
+            element: <AllRecords />,
+          },
+          {
+            path: 'user-records/:username',
+            element: <UserRecords />,
+          },
+        ],
       },
     ],
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <ShopContextProvider>
-   <RouterProvider router={router} />
-   </ShopContextProvider>
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
 );
-
 

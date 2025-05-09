@@ -1,0 +1,26 @@
+import { create } from 'zustand';
+import axios from 'axios';
+
+const API_URL = import.meta.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+
+export const useAuthStore = create((set) => ({
+  user: null,
+  isAuthenticated: false,
+  isLoading: false,
+  error: null,
+  login: async (email, password) => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+      localStorage.setItem('token', res.data.token);
+      set({ user: { email }, isAuthenticated: true, isLoading: false });
+    } catch (err) {
+      set({ error: err.response?.data?.message || 'Login failed', isLoading: false });
+      throw err;
+    }
+  },
+  logout: () => {
+    localStorage.removeItem('token');
+    set({ user: null, isAuthenticated: false, error: null });
+  },
+}));

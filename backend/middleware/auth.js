@@ -1,45 +1,14 @@
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
-// const authUser = async (req, res, next) => {
+  export const verifyToken = (req, res, next) => {
+    const token = req.header('auth-token');
+    if (!token) return res.status(401).json({ message: 'Access denied' });
 
-//     const {token} = req.header;
-
-//     if (!token) {
-//         return res.json({ success: false, message: "Not Authorized Login Again"})
-//     }
-
-//     try {
-
-//         const token_decode = jwt.verify(token, process.env.JWT_SECRET)
-//         req.body.userId = token_decode.id
-//         next()
-
-//     } catch (error) {
-//         console.log(error);
-//         res.json({ success: false, message: error.message })
-        
-//     }
-// }
-
-
-const authUser = async (req, res, next) => {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return res.json({ success: false, message: "Not Authorized, please log in again" });
-    }
-
-    const token = authHeader.split(' ')[1]; // Extract the token after 'Bearer'
-    
     try {
-        const token_decode = jwt.verify(token, process.env.JWT_SECRET);
-        req.body.userId = token_decode.id; // Attach userId to the request body
-        next();
-    } catch (error) {
-        console.log(error);
-        res.json({ success: false, message: error.message });
+      const verified = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = verified;
+      next();
+    } catch (err) {
+      res.status(400).json({ message: 'Invalid token' });
     }
-};
-
-
-export default authUser
+  };
