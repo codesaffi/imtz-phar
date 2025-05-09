@@ -2,7 +2,7 @@ import React from "react";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
 import NewsLetterBox from "../components/NewsLetterBox";
-import { FontAwesomeIcon } from '@fortawesome/react-FontAwesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faInstagram, faFacebook, faTiktok} from '@fortawesome/free-brands-svg-icons'
 import { NavLink } from "react-router-dom";
 
