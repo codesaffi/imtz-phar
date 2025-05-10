@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const API_URL = 'https://imtz-backend.vercel.app/api';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -11,7 +12,7 @@ export const useAuthStore = create((set) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+      const res = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
       localStorage.setItem('token', res.data.token);
       set({ user: { email }, isAuthenticated: true, isLoading: false });
     } catch (err) {
@@ -28,7 +29,7 @@ export const useAuthStore = create((set) => ({
   register: async (email, password, name) => {
   set({ isLoading: true, error: null });
   try {
-    const res = await axios.post(`${API_URL}/auth/register`, { email, password, name });
+    const res = await axios.post(`${BACKEND_URL}/auth/register`, { email, password, name });
     localStorage.setItem('token', res.data.token);
     set({ user: { email, name }, isAuthenticated: true, isLoading: false });
   } catch (err) {

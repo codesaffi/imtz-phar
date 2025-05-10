@@ -14,6 +14,7 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated ? children : <Navigate to="/login" replace />;
 };
 
+
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0e0b21] via-[#172542] to-[#282354] relative overflow-hidden">

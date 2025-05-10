@@ -8,11 +8,14 @@ import purchaseRoutes from './routes/purchaseRoutes.js';
 
 dotenv.config();
 
+
+const frontendlink =  process.env.FRONTEND_URL;
 const app = express();
+
 
 // Middleware
 app.use(cors({
-  origin: process.env.frontendlink || "https://imtz-frontend.vercel.app",  
+  origin: frontendlink,  
   credentials: true,
 }));
 app.use(express.json());
@@ -31,4 +34,4 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT} `));
