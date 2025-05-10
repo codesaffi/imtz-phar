@@ -1,95 +1,125 @@
-// import React, { useState } from 'react';
-// import Navbar from '../components/Navbar';
-
-// import Sidebar from '../components/Sidebar';
-// import { Outlet } from 'react-router-dom';
-// import classNames from 'classnames';
-
-// const LandingPage = () => {
-//   const [isCollapsed, setIsCollapsed] = useState(true);
-
-//   const toggleSidebar = () => {
-//     setIsCollapsed(!isCollapsed);
-//   };
-
-//   const contentPadding = classNames('p-4 sm:p-6', {
-//     'pl-[88px] sm:pl-24': isCollapsed,
-//     'pl-[264px] sm:pl-72': !isCollapsed,
-//   });
-
-//   return (
-//     <>
-//       <Navbar />
-//       <Sidebar isCollapsed={isCollapsed} toggleSidebar={toggleSidebar} />
-//       <main className={contentPadding}>
-//         <Outlet />
-//       </main>
-//     </>
-//   );
-// };
-
-// export default LandingPage;
-
-
-
-
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import FloatingShapes from '../components/FloatingShapes'; // Optional for visual flair
-import Navbar from '../components/Navbar';
+import FloatingShapes from '../components/FloatingShapes';
 
 const LandingPage = () => {
   return (
-    <>
-      {/* <Navbar /> */}
-      {/* Background with optional floating shapes */}
-      <div className="bg-[#0e0b21] p-4 shadow-lg">
+    <div className="bg-[#0e0b21] p-4 shadow-lg">
+      
+      {/* Floating background shapes */}
+      <FloatingShapes color="bg-[#7d98d1]" size="w-32 h-32" top="20%" left="10%" delay={0} />
+      <FloatingShapes color="bg-[#282354]" size="w-48 h-48" top="60%" left="80%" delay={2} />
+      <FloatingShapes color="bg-[#7d98d1]" size="w-24 h-24" top="40%" left="50%" delay={4} />
 
-        {/* Optional animated background shapes
-        <FloatingShapes color="bg-[#7d98d1]" size="w-64 h-64" top="-5%" left="15%" delay={0} />
-        <FloatingShapes color="bg-blue-400" size="w-24 h-24" top="10%" left="2%" delay={1} />
-        <FloatingShapes color="bg-blue-400" size="w-16 h-16" top="50%" left="80%" delay={3} />
-        <FloatingShapes color="bg-blue-400" size="w-20 h-20" top="80%" left="20%" delay={5} />
-        <FloatingShapes color="bg-blue-400" size="w-24 h-24" top="70%" left="80%" delay={1} /> */}
+      {/* Hero Section */}
+      <section className="relative min-h-[80vh] flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-4xl z-10">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#7d98d1] to-[#282354] text-transparent bg-clip-text"
+          >
+            Welcome to City Pharmacy
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto"
+          >
+            Your trusted partner in health and wellness. Providing quality care and medications since 1995.
+          </motion.p>
 
-        {/* Hero Section */}
-        <section className="flex flex-col items-center justify-center min-h-[80vh] text-center p-6">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-[#7d98d1] to-[#282354] text-transparent bg-clip-text mb-6">
-            Welcome to MedEase Pharmacy
-          </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mb-8">
-            Your trusted partner in health — delivering medicines, wellness, and care at your convenience.
-          </p>
-          <div className="flex gap-6">
-            <Link to="/signup" className="px-6 py-3 bg-gradient-to-r from-[#7d98d1] to-[#282354] text-white rounded-lg font-semibold shadow-lg">
-              Sign Up
-            </Link>
-            <Link to="/login" className="px-6 py-3 border-2 border-[#7d98d1] text-[#7d98d1] rounded-lg font-semibold hover:bg-[#7d98d1]/10">
-              Login
-            </Link>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="flex gap-6 justify-center flex-wrap"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 bg-gradient-to-r from-[#7d98d1] to-[#282354] text-white rounded-lg font-semibold shadow-lg"
+            >
+              <Link to="/signup">Get Started</Link>
+            </motion.button>
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-3 border-2 border-[#7d98d1] text-[#7d98d1] rounded-lg font-semibold hover:bg-[#7d98d1]/10"
+            >
+              <Link to="/login">Order Now</Link>
+            </motion.button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+
+<section className="py-16 px-4 sm:px-6 lg:px-8 bg-transparent relative z-10">
+  <div className="max-w-6xl mx-auto">
+    <h2 className="text-4xl font-bold mb-12 text-center text-[#7d98d1]">Why Choose Us?</h2>
+    
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "24/7 Service",
+          description: "Round-the-clock pharmacy services for your urgent needs"
+        },
+        {
+          title: "Expert Staff",
+          description: "Licensed pharmacists and healthcare professionals"
+        },
+        {
+          title: "Free Delivery",
+          description: "Fast and reliable medication delivery service"
+        }
+      ].map((feature, index) => (
+        <motion.div 
+          key={index}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.2 }}
+          viewport={{ once: true }}
+          className="p-6 rounded-2xl backdrop-blur-md bg-[#ffffff0d] border border-[#7d98d155] shadow-[0_4px_30px_rgba(0,0,0,0.5)] transition-transform duration-300 hover:scale-105"
+        >
+          <h3 className="text-2xl font-semibold mb-4 text-[#7d98d1]">{feature.title}</h3>
+          <p className="text-gray-300">{feature.description}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+      {/* Contact Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl font-bold mb-12 text-[#7d98d1]">Contact Us</h2>
+          
+          <div className="grid md:grid-cols-3 gap-8 text-gray-300">
+            <div className="space-y-2">
+              <h3 className="text-2xl font-semibold text-white">Address</h3>
+              <p>123 Health Street</p>
+              <p>Medical City, MC 12345</p>
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="text-2xl font-semibold text-white">Phone</h3>
+              <p>Emergency: (123) 456-7890</p>
+              <p>Office: (123) 456-7891</p>
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="text-2xl font-semibold text-white">Hours</h3>
+              <p>Open 24/7</p>
+              <p>365 Days a Year</p>
+            </div>
           </div>
-        </section>
-
-<section className="bg-[#0e0b21] py-16 px-6 text-center">
-  <h2 className="text-3xl font-bold text-[#7d98d1] mb-4">About MedEase Pharmacy</h2>
-  <p className="text-gray-300 max-w-3xl mx-auto">
-    MedEase Pharmacy is dedicated to providing quality medicines, expert advice, and health products to keep you and your family safe and healthy.
-    With decades of experience and thousands of happy customers, we are proud to be a trusted name in healthcare.
-  </p>
-</section>
-
-
-
-{/* Contact Section */}
-<section className="bg-[#0e0b21] py-16 px-6 text-center">
-  <h2 className="text-3xl font-bold text-[#7d98d1] mb-4">Contact Us</h2>
-  <p className="text-gray-300">📍 123 Health Ave, Wellness City, PH 45678</p>
-  <p className="text-gray-300 mt-2">📞 +1 234 567 890</p>
-  <p className="text-gray-300 mt-2">✉️ contact@medeasepharma.com</p>
-</section>
-
-      </div>
-    </>
+        </div>
+      </section>
+    </div>
   );
 };
 
