@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const API_URL = import.meta.env.REACT_APP_API_URL || 'https://imtz-backend.vercel.app/api';
+const API_URL = 'https://imtz-backend.vercel.app/api';
 
 export const useAuthStore = create((set) => ({
   user: null,
