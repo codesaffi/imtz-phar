@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import { useAuthStore } from '../store/authStore';
 
+
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
