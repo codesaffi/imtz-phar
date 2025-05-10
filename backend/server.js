@@ -13,10 +13,17 @@ const frontendlink =  process.env.FRONTEND_URL;
 const app = express();
 
 
-// Middleware
+const allowedOrigins = [process.env.FRONTEND_URL,"https://phar-frontend.vercel.app"];
+
 app.use(cors({
-  origin: frontendlink,  
-  credentials: true,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // if you're using cookies or sessions
 }));
 app.use(express.json());
 
