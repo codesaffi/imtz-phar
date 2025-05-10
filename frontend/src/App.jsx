@@ -7,6 +7,7 @@ import UserRecords from './pages/UserRecords';
 import FloatingShapes from './components/FloatingShapes';
 import { useAuthStore } from './store/authStore2';
 import Navbar from './components/Navbar';
+import SignupPage from './pages/SignupPage';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuthStore();
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+         <Route path="/signup" element={<SignupPage />} />
         <Route path="/admin" element={<ProtectedRoute><LandingPage /></ProtectedRoute>}>
           <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="all-records" element={<ProtectedRoute><AllRecords /></ProtectedRoute>} />

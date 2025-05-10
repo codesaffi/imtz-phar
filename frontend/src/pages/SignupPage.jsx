@@ -1,19 +1,26 @@
+// // src/pages/SignupPage.jsx
 // import React, { useState } from 'react';
 // import { motion } from 'framer-motion';
-// import { Loader, Lock, Mail } from 'lucide-react';
-// import { Link } from 'react-router-dom';
+// import { Loader, Lock, Mail, User } from 'lucide-react';
+// import { Link, useNavigate } from 'react-router-dom';
 // import Input from '../components/Input';
 // import { useAuthStore } from '../store/authStore2';
 
-
-// const LoginPage = () => {
+// const SignupPage = () => {
 //   const [email, setEmail] = useState('');
+//   const [name, setName] = useState('');
 //   const [password, setPassword] = useState('');
-//   const { login, isLoading, error } = useAuthStore();
+//   const { register, isLoading, error } = useAuthStore();
+//   const navigate = useNavigate();
 
-//   const handleLogin = async (e) => {
+//   const handleSignup = async (e) => {
 //     e.preventDefault();
-//     await login(email, password);
+//     try {
+//       await register(email, password, name);
+//       navigate('/dashboard');
+//     } catch (err) {
+//       console.error(err);
+//     }
 //   };
 
 //   return (
@@ -25,30 +32,14 @@
 //     >
 //       <div className='p-8'>
 //         <h2 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-[#7d98d1] to-[#282354] text-transparent bg-clip-text'>
-//           Welcome Back
+//           Create an Account
 //         </h2>
 
-//         <form onSubmit={handleLogin}>
-//           <Input
-//             icon={Mail}
-//             type='email'
-//             placeholder='Email Address'
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//           />
-//           <Input
-//             icon={Lock}
-//             type='password'
-//             placeholder='Password'
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//           />
+//         <form onSubmit={handleSignup}>
+//           <Input icon={User} type='text' placeholder='Full Name' value={name} onChange={(e) => setName(e.target.value)} />
+//           <Input icon={Mail} type='email' placeholder='Email Address' value={email} onChange={(e) => setEmail(e.target.value)} />
+//           <Input icon={Lock} type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
-//           <div className='flex items-center mb-6'>
-//             <Link to='/forgot-password' className='text-sm text-[#7d98d1] hover:underline'>
-//               Forgot Password?
-//             </Link>
-//           </div>
 //           {error && <p className='text-red-500 font-semibold mb-2'>{error}</p>}
 
 //           <motion.button
@@ -58,24 +49,22 @@
 //             type='submit'
 //             disabled={isLoading}
 //           >
-//             {isLoading ? <Loader size='1.5rem' className='animate-spin mx-auto text-white' /> : 'Login'}
+//             {isLoading ? <Loader size='1.5rem' className='animate-spin mx-auto text-white' /> : 'Sign Up'}
 //           </motion.button>
 //         </form>
 //       </div>
 
 //       <div className='px-8 py-4 bg-[#172542] flex justify-center'>
 //         <p className='text-sm text-gray-300'>
-//           Don't have an account?{' '}
-//           <Link to='/signup' className='text-[#7d98d1] ml-1 hover:underline'>
-//             Sign Up
-//           </Link>
+//           Already have an account?
+//           <Link to='/login' className='text-[#7d98d1] ml-1 hover:underline'>Login</Link>
 //         </p>
 //       </div>
 //     </motion.div>
 //   );
 // };
 
-// export default LoginPage;
+// export default SignupPage;
 
 
 
@@ -83,20 +72,27 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Loader, Lock, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Loader, Lock, Mail, User } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import Input from '../components/Input';
 import { useAuthStore } from '../store/authStore2';
 import FloatingShapes from '../components/FloatingShapes';
 
-const LoginPage = () => {
+const SignupPage = () => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isLoading, error } = useAuthStore();
+  const { register, isLoading, error } = useAuthStore();
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    await login(email, password);
+    try {
+      await register(email, password, name);
+      navigate('/dashboard');
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -114,30 +110,31 @@ const LoginPage = () => {
       >
         <div className="p-6 md:p-8">
           <h2 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-[#7d98d1] to-[#282354] text-transparent bg-clip-text'>
-            Welcome Back
+            Create an Account
           </h2>
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            <Input
-              icon={Mail}
-              type='email'
-              placeholder='Email Address'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+          <form onSubmit={handleSignup} className="space-y-4">
+            <Input 
+              icon={User} 
+              type='text' 
+              placeholder='Full Name' 
+              value={name} 
+              onChange={(e) => setName(e.target.value)} 
             />
-            <Input
-              icon={Lock}
-              type='password'
-              placeholder='Password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+            <Input 
+              icon={Mail} 
+              type='email' 
+              placeholder='Email Address' 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
             />
-
-            <div className='flex justify-between items-center'>
-              <Link to='/forgot-password' className='text-sm text-[#7d98d1] hover:underline'>
-                Forgot Password?
-              </Link>
-            </div>
+            <Input 
+              icon={Lock} 
+              type='password' 
+              placeholder='Password' 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            />
 
             {error && <p className='text-red-500 text-sm font-semibold mt-2'>{error}</p>}
 
@@ -151,21 +148,21 @@ const LoginPage = () => {
               {isLoading ? (
                 <div className="flex items-center justify-center gap-2">
                   <Loader size='1.2rem' className='animate-spin' />
-                  <span>Logging in...</span>
+                  <span>Creating Account...</span>
                 </div>
-              ) : 'Login'}
+              ) : 'Sign Up'}
             </motion.button>
           </form>
         </div>
 
         <div className='px-6 py-4 bg-[#172542]/50 border-t border-[#282354]'>
           <p className='text-sm text-center text-gray-300'>
-            Don't have an account?{' '}
+            Already have an account?{' '}
             <Link 
-              to='/signup' 
+              to='/login' 
               className='text-[#7d98d1] hover:underline font-medium'
             >
-              Create Account
+              Login
             </Link>
           </p>
         </div>
@@ -174,4 +171,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;

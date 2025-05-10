@@ -19,8 +19,21 @@ export const useAuthStore = create((set) => ({
       throw err;
     }
   },
+  
   logout: () => {
     localStorage.removeItem('token');
     set({ user: null, isAuthenticated: false, error: null });
   },
+
+  register: async (email, password, name) => {
+  set({ isLoading: true, error: null });
+  try {
+    const res = await axios.post(`${API_URL}/auth/register`, { email, password, name });
+    localStorage.setItem('token', res.data.token);
+    set({ user: { email, name }, isAuthenticated: true, isLoading: false });
+  } catch (err) {
+    set({ error: err.response?.data?.message || 'Registration failed', isLoading: false });
+    throw err;
+  }
+},
 }));

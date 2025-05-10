@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import AllRecords from './pages/AllRecords';
 import UserRecords from './pages/UserRecords';
+import SignupPage from './pages/SignupPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginPage />,
+      },
+      {
+        path: '/signup',
+        element: <SignupPage />,
       },
       {
         path: '/admin',
