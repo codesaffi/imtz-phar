@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Loader, Lock, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Input from '../components/Input';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../store/authStore2';
 
 
 const LoginPage = () => {

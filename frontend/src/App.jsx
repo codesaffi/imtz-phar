@@ -5,7 +5,7 @@ import Dashboard from './pages/Dashboard';
 import AllRecords from './pages/AllRecords';
 import UserRecords from './pages/UserRecords';
 import FloatingShapes from './components/FloatingShapes';
-import { useAuthStore } from './store/authStore';
+import { useAuthStore } from './store/authStore2';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuthStore();

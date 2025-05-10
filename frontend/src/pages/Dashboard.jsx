@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../store/authStore2';
 
 const Dashboard = () => {
   const { logout } = useAuthStore();
