@@ -19,15 +19,6 @@ const SignupPage = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // const handleSignup = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await register(email, password, name);
-  //     navigate('/admin/dashboard');
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,6 +52,7 @@ const SignupPage = () => {
             <Input 
               icon={User} 
               type='text' 
+              name="name" 
               placeholder='Full Name' 
               value={formData.name}
               onChange={handleChange} required
@@ -68,6 +60,7 @@ const SignupPage = () => {
             <Input 
               icon={Mail} 
               type='email' 
+              name="email"
               placeholder='Email Address' 
               value={formData.email}
              onChange={handleChange} required
@@ -75,6 +68,7 @@ const SignupPage = () => {
             <Input 
               icon={Lock} 
               type='password' 
+              name="password" c
               placeholder='Password' 
              value={formData.password}
              onChange={handleChange} required

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ icon: Icon, type, placeholder, value, onChange }) => {
+const Input = ({ icon: Icon, type, placeholder, value, onChange,name }) => {
   return (
     <div className="relative mb-4">
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -8,6 +8,7 @@ const Input = ({ icon: Icon, type, placeholder, value, onChange }) => {
       </div>
       <input
         type={type}
+        name={name} 
         placeholder={placeholder}
         value={value}
         onChange={onChange}
