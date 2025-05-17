@@ -14,7 +14,9 @@ const transactionSchema = new mongoose.Schema({
   totalAmount: { type: Number, required: true },
   paidAmount: { type: Number, required: true },
   date: { type: Date, default: Date.now },
-}, { timestamps: true });
+}, {  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }  });
 
 transactionSchema.virtual('remainingAmount').get(function () {
   return this.totalAmount - this.paidAmount;

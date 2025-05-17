@@ -15,10 +15,15 @@ router.post('/', async (req, res) => {
 
 router.get('/person/:id', async (req, res) => {
   try {
-    const transactions = await Transaction.find({ person: req.params.id });
+    const transactions = await Transaction.find({ person: req.params.id })
+      .sort({ date: -1 });  // Add sorting
     res.json(transactions);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Error fetching transactions:', err);
+    res.status(500).json({ 
+      message: err.message,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined 
+    });
   }
 });
 

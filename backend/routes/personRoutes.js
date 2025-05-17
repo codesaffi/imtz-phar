@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/api/persons', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const persons = await Person.find(); // Or however you’re fetching data
     res.status(200).json(persons);
