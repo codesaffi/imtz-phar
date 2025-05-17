@@ -20,10 +20,10 @@ const Dashboard = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Link
-          to="/admin/all-records"
+          to="/admin/customer-page"
           className="bg-[#1f2d47] p-6 rounded-lg shadow-lg hover:bg-[#282354] transition text-white"
         >
-          <h2 className="text-xl font-semibold">All Records</h2>
+          <h2 className="text-xl font-semibold">CUSTOMERS</h2>
           <p>View all stock records.</p>
         </Link>
         {/* <Link

@@ -6,10 +6,10 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
-import AllRecords from './pages/AllRecords';
 import SignupPage from './pages/SignupPage.jsx';
 import AdminLayout from './components/AdminLayout';
 import ProtectedRoute from './components/ProtectRoute';
+import CustomerPage from './pages/CustomerPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
         children: [
           { index: true, element: <Dashboard /> },
-          { path: 'all-records', element: <AllRecords /> },
+          { path: 'customer-page', element: <CustomerPage /> },
         ],
       },
     ],
