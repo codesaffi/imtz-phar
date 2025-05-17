@@ -3,30 +3,30 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
-import productRoutes from './routes/productRoutes.js';
-import purchaseRoutes from './routes/purchaseRoutes.js';
 
 dotenv.config();
 
 
-// const frontendlink =  process.env.FRONTEND_URL;
+const frontendlink =  process.env.FRONTEND_URL;
 const app = express();
-
 
 // Middleware
 app.use(cors({
-  origin: "https://phar-frontend.vercel.app",  
+  origin: frontendlink,  
   credentials: true,
 }));
 app.use(express.json());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Headers', 'auth-token, Content-Type');
+  next();
+});
 
 // Connect to MongoDB
 connectDB();
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
-app.use('/api/purchases', purchaseRoutes);
 
 // Basic route
 app.get('/', (req, res) => {

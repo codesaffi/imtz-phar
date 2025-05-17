@@ -16,7 +16,13 @@ import express from 'express';
       if (!validPassword) return res.status(400).json({ message: 'Invalid password' });
 
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-      res.json({ token });
+      
+      res.json({ token,
+      user: {
+      email: user.email,
+      name: user.name,
+      id: user._id
+    } });
     } catch (err) {
       res.status(500).json({ message: 'Server error' });
     }
@@ -39,4 +45,20 @@ import express from 'express';
     }
   });
 
+  // Add this new route to authRoutes.js
+router.get('/verify', async (req, res) => {
+  try {
+    const token = req.header('auth-token');
+    if (!token) return res.status(401).json(false);
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    if (!verified) return res.status(401).json(false);
+
+    res.json(true);
+  } catch (err) {
+    res.status(500).json({ message: 'Token verification failed' });
+  }
+});
+
   export default router;
+  

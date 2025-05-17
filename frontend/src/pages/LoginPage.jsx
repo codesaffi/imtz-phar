@@ -1,19 +1,31 @@
-import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader, Lock, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import { useAuthStore } from '../store/authStore2';
 import FloatingShapes from '../components/FloatingShapes';
+// Add useNavigate hook at the top:
+// import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
+    const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, isLoading, error } = useAuthStore();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    // await login(email, password);
+      try {
     await login(email, password);
+    // Add this navigation after successful login
+   navigate('/admin');
+  } catch (err) {
+    // Error will be handled by the auth store
+  }
   };
 
   return (

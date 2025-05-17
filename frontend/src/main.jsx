@@ -9,40 +9,25 @@ import Dashboard from './pages/Dashboard';
 import AllRecords from './pages/AllRecords';
 import UserRecords from './pages/UserRecords';
 import SignupPage from './pages/SignupPage.jsx';
+import { useAuthStore } from './store/authStore2';
+import AdminLayout from './components/AdminLayout';
+import ProtectedRoute from './components/ProtectRoute';
+
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
+      { index: true, element: <LandingPage /> },
+      { path: 'login', element: <LoginPage /> },
+      { path: 'signup', element: <SignupPage /> },
       {
-        path: '/',
-        element: <LandingPage />,
-      },
-      {
-        path: '/login',
-        element: <LoginPage />,
-      },
-      {
-        path: '/signup',
-        element: <SignupPage />,
-      },
-      {
-        path: '/admin',
-        element: <LandingPage />,
+        path: 'admin',
+        element: <ProtectedRoute><AdminLayout /></ProtectedRoute>,
         children: [
-          {
-            path: 'dashboard',
-            element: <Dashboard />,
-          },
-          {
-            path: 'all-records',
-            element: <AllRecords />,
-          },
-          {
-            path: 'user-records/:username',
-            element: <UserRecords />,
-          },
+          { index: true, element: <Dashboard /> },
+          { path: 'all-records', element: <AllRecords /> },
         ],
       },
     ],

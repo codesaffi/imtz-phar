@@ -6,18 +6,34 @@ import Input from '../components/Input';
 import { useAuthStore } from '../store/authStore2';
 import FloatingShapes from '../components/FloatingShapes';
 
+
 const SignupPage = () => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const { register, isLoading, error } = useAuthStore();
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: '', password: '', name: '' });
 
-  const handleSignup = async (e) => {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // const handleSignup = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await register(email, password, name);
+  //     navigate('/admin/dashboard');
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+
+    const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await register(email, password, name);
-      navigate('/dashboard');
+      await register(formData.email, formData.password, formData.name);
+      navigate('/admin'); // Navigate to dashboard
     } catch (err) {
       console.error(err);
     }
@@ -41,27 +57,27 @@ const SignupPage = () => {
             Create an Account
           </h2>
 
-          <form onSubmit={handleSignup} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4">
             <Input 
               icon={User} 
               type='text' 
               placeholder='Full Name' 
-              value={name} 
-              onChange={(e) => setName(e.target.value)} 
+              value={formData.name}
+              onChange={handleChange} required
             />
             <Input 
               icon={Mail} 
               type='email' 
               placeholder='Email Address' 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+              value={formData.email}
+             onChange={handleChange} required
             />
             <Input 
               icon={Lock} 
               type='password' 
               placeholder='Password' 
-              value={password} 
-              onChange={(e) => setPassword(e.target.value)} 
+             value={formData.password}
+             onChange={handleChange} required
             />
 
             {error && <p className='text-red-500 text-sm font-semibold mt-2'>{error}</p>}
@@ -80,6 +96,7 @@ const SignupPage = () => {
                 </div>
               ) : 'Sign Up'}
             </motion.button>
+            {error && <p>{error}</p>}
           </form>
         </div>
 
