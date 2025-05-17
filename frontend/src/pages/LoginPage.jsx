@@ -1,13 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader, Lock, Mail } from 'lucide-react';
-// import { Link } from 'react-router-dom';
 import Input from '../components/Input';
 import { useAuthStore } from '../store/authStore2';
 import FloatingShapes from '../components/FloatingShapes';
-// Add useNavigate hook at the top:
-// import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {

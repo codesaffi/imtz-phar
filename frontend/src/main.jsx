@@ -7,9 +7,7 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import AllRecords from './pages/AllRecords';
-import UserRecords from './pages/UserRecords';
 import SignupPage from './pages/SignupPage.jsx';
-import { useAuthStore } from './store/authStore2';
 import AdminLayout from './components/AdminLayout';
 import ProtectedRoute from './components/ProtectRoute';
 
