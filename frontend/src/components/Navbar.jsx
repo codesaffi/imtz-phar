@@ -8,12 +8,12 @@ const Navbar = () => {
         <Link to="/" className="text-2xl font-bold text-[#7d98d1]">City Pharmacy</Link>
         <div className="space-x-4">
           <Link to="/login" className="text-[#7d98d1] hover:underline px-4 py-2">Login</Link>
-          <Link 
+          {/* <Link 
             to="/signup" 
             className="bg-[#7d98d1] text-[#0e0b21] px-4 py-2 rounded-lg hover:bg-[#6984b8] transition-colors"
           >
             Sign Up
-          </Link>
+          </Link> */}
         </div>
       </div>
     </nav>

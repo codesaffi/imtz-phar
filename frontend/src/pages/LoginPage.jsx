@@ -1,10 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader, Lock, Mail } from 'lucide-react';
 import Input from '../components/Input';
 import { useAuthStore } from '../store/authStore2';
 import FloatingShapes from '../components/FloatingShapes';
+
 
 
 const LoginPage = () => {
@@ -84,7 +85,7 @@ const LoginPage = () => {
           </form>
         </div>
 
-        <div className='px-6 py-4 bg-[#172542]/50 border-t border-[#282354]'>
+        {/* <div className='px-6 py-4 bg-[#172542]/50 border-t border-[#282354]'>
           <p className='text-sm text-center text-gray-300'>
             Don't have an account?{' '}
             <Link 
@@ -94,7 +95,7 @@ const LoginPage = () => {
               Create Account
             </Link>
           </p>
-        </div>
+        </div> */}
       </motion.div>
     </div>
   );
