@@ -20,7 +20,7 @@ const LandingPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-[#7d98d1] to-[#282354] text-transparent bg-clip-text"
           >
-            Welcome to boja pharmacy
+            Welcome to boja 
           </motion.h1>
           
           <motion.p 
