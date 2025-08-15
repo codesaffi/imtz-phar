@@ -57,22 +57,22 @@ export const useAuthStore = create((set) => ({
     set({ user: null, isAuthenticated: false, error: null });
   },
 
-  // register: async (email, password, name) => {
-  //   set({ isLoading: true, error: null });
-  //   try {
-  //     const res = await axios.post(`${BACKEND_URL}/api/auth/register`, { email, password, name });
-  //     localStorage.setItem('token', res.data.token);
-  //     set({ 
-  //       user: { email, name }, 
-  //       isAuthenticated: true, 
-  //       isLoading: false 
-  //     });
-  //   } catch (err) {
-  //     set({ 
-  //       error: err.response?.data?.message || 'Registration failed', 
-  //       isLoading: false 
-  //     });
-  //     throw err;
-  //   }
-  // },
+  register: async (email, password, name) => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await axios.post(`${BACKEND_URL}/api/auth/register`, { email, password, name });
+      localStorage.setItem('token', res.data.token);
+      set({ 
+        user: { email, name }, 
+        isAuthenticated: true, 
+        isLoading: false 
+      });
+    } catch (err) {
+      set({ 
+        error: err.response?.data?.message || 'Registration failed', 
+        isLoading: false 
+      });
+      throw err;
+    }
+  },
 }));

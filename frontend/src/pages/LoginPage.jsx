@@ -85,7 +85,7 @@ const LoginPage = () => {
           </form>
         </div>
 
-        {/* <div className='px-6 py-4 bg-[#172542]/50 border-t border-[#282354]'>
+        <div className='px-6 py-4 bg-[#172542]/50 border-t border-[#282354]'>
           <p className='text-sm text-center text-gray-300'>
             Don't have an account?{' '}
             <Link 
@@ -95,7 +95,7 @@ const LoginPage = () => {
               Create Account
             </Link>
           </p>
-        </div> */}
+        </div>
       </motion.div>
     </div>
   );

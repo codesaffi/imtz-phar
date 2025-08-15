@@ -26,13 +26,13 @@ const Dashboard = () => {
           <h2 className="text-xl font-semibold">CUSTOMERS</h2>
           <p>View all stock records.</p>
         </Link>
-        {/* <Link
+        <Link
           to="/admin/user-records"
           className="bg-[#1f2d47] p-6 rounded-lg shadow-lg hover:bg-[#282354] transition text-white"
         >
           <h2 className="text-xl font-semibold">User Records</h2>
           <p>Search and view individual user records.</p>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );

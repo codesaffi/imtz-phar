@@ -29,21 +29,21 @@ import express from 'express';
   });
 
   // // Register Admin (for initial setup)
-  // router.post('/register', async (req, res) => {
-  //   const { email, password, name } = req.body;
-  //   try {
-  //     let user = await User.findOne({ email });
-  //     if (user) return res.status(400).json({ message: 'User already exists' });
+  router.post('/register', async (req, res) => {
+    const { email, password, name } = req.body;
+    try {
+      let user = await User.findOne({ email });
+      if (user) return res.status(400).json({ message: 'User already exists' });
 
-  //     user = new User({ email, password, name });
-  //     await user.save();
+      user = new User({ email, password, name });
+      await user.save();
 
-  //     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  //     res.status(201).json({ token });
-  //   } catch (err) {
-  //     res.status(500).json({ message: 'Server error' });
-  //   }
-  // });
+      const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.status(201).json({ token });
+    } catch (err) {
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
 
   // Add this new route to authRoutes.js
 router.get('/verify', async (req, res) => {
