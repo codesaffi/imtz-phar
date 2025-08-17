@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0e0b21] via-[#172542] to-[#282354] relative overflow-hidden">
-      {/* <Navbar /> */}
+     
       <Outlet />  {/*👈 This is where your nested routes like LandingPage, LoginPage, etc. will render */}
       
       {/* Optional animated background shapes */}

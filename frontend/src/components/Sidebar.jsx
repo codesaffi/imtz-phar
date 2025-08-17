@@ -46,7 +46,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   };
 
   return (
-    <div className="fixed left-0 top-[60px] sm:top-[76px] h-[calc(100vh-60px)] sm:h-[calc(100vh-76px)] flex items-center z-40">
+    <div className="fixed left-0 top-[60px] sm:top-[64px] h-[calc(100vh-60px)] sm:h-[calc(100vh-76px)] flex items-center z-40">
       <motion.div
         initial={{ width: 80 }}
         animate={{ width: isCollapsed ? 80 : 256 }}
@@ -63,6 +63,10 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
         </button>
 
         <nav className="flex flex-col space-y-4 mt-10">
+          <Link to="/admin/add-user" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
+            <User className="w-5 h-5" />
+            {!isCollapsed && <span className="ml-3">Add User</span>}
+          </Link>
           <Link to="/admin/dashboard" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
             <Home className="w-5 h-5" />
             {!isCollapsed && <span className="ml-3">Dashboard</span>}

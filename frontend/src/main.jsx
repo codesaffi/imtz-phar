@@ -10,6 +10,7 @@ import SignupPage from './pages/SignupPage.jsx';
 import AdminLayout from './components/AdminLayout';
 import ProtectedRoute from './components/ProtectRoute';
 import CustomerPage from './pages/CustomerPage.jsx';
+import AddUserPage from './pages/AddUserPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Dashboard /> },
           { path: 'customer-page', element: <CustomerPage /> },
+          { path: 'add-user', element: <AddUserPage /> },
         ],
       },
     ],

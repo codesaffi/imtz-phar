@@ -2,11 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import FloatingShapes from '../components/FloatingShapes';
+import Navbar from '../components/Navbar';
 
 const LandingPage = () => {
   return (
-    <div className="bg-[#0e0b21] p-4 shadow-lg">
-      
+    <>
+
+    <Navbar />
+        <div className="bg-[#0e0b21] p-4 shadow-lg">
+       
       {/* Floating background shapes */}
       <FloatingShapes color="bg-[#7d98d1]" size="w-32 h-32" top="20%" left="10%" delay={0} />
       <FloatingShapes color="bg-[#282354]" size="w-48 h-48" top="60%" left="80%" delay={2} />
@@ -120,6 +124,8 @@ const LandingPage = () => {
         </div>
       </section>
     </div>
+    </>
+
   );
 };
 
