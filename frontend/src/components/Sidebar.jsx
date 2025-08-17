@@ -67,7 +67,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             <User className="w-5 h-5" />
             {!isCollapsed && <span className="ml-3">Add User</span>}
           </Link>
-          <Link to="/admin/dashboard" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
+          <Link to="/admin" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
             <Home className="w-5 h-5" />
             {!isCollapsed && <span className="ml-3">Dashboard</span>}
           </Link>
@@ -75,9 +75,9 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
             <Box className="w-5 h-5" />
             {!isCollapsed && <span className="ml-3">Records</span>}
           </Link>
-          <Link to="/admin/user-records" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
+          <Link to="/admin/list-users" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
             <BarChart className="w-5 h-5" />
-            {!isCollapsed && <span className="ml-3">User Records</span>}
+            {!isCollapsed && <span className="ml-3">List Users</span>}
           </Link>
           {/* <Link to="/finance" className="flex items-center text-gray-300 hover:text-[#7d98d1] p-2 rounded-lg hover:bg-[#282354]">
             <Wallet className="w-5 h-5" />

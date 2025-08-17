@@ -44,6 +44,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CustomerForm from '../components/CustomerForm';
 import RecordForm from '../components/RecordForm';
+import BackForwardNav from '../components/BackForwardNav';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -61,7 +62,8 @@ const CustomerPage = () => {
 
   return (
     <div className="p-6 bg-[#172542] min-h-screen text-white">
-      <CustomerForm onCustomerCreated={(newCustomer) => setCustomers([...customers, newCustomer])} />
+  <BackForwardNav />
+  <CustomerForm onCustomerCreated={(newCustomer) => setCustomers([...customers, newCustomer])} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
         {customers.map((customer) => (
           <div

@@ -11,6 +11,8 @@ import AdminLayout from './components/AdminLayout';
 import ProtectedRoute from './components/ProtectRoute';
 import CustomerPage from './pages/CustomerPage.jsx';
 import AddUserPage from './pages/AddUserPage.jsx';
+import ListUsersPage from './pages/ListUsersPage.jsx';
+import UserDetailsPage from './pages/UserDetailsPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -28,6 +30,8 @@ const router = createBrowserRouter([
           { index: true, element: <Dashboard /> },
           { path: 'customer-page', element: <CustomerPage /> },
           { path: 'add-user', element: <AddUserPage /> },
+          { path: 'list-users', element: <ListUsersPage /> },
+          { path: 'user/:userId', element: <UserDetailsPage /> },
         ],
       },
     ],

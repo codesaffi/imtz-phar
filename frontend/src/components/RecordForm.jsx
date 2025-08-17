@@ -131,7 +131,7 @@ import axios from 'axios';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const RecordForm = ({ customerId }) => {
+const RecordForm = ({ customerId, onCustomerCreated, hideHistory = false }) => {
   const [type, setType] = useState('purchase');
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
@@ -154,12 +154,14 @@ const RecordForm = ({ customerId }) => {
     }
   }, [customerId]);
 
+  // Removed auto-save logic. Only submit on form submit.
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post(`${BACKEND_URL}/api/transactions`, {
         person: customerId,
-        transactionType: 'buy',
+        transactionType: type === 'purchase' ? 'buy' : 'sell',
         products: [
           {
             name: productName,
@@ -182,7 +184,10 @@ const RecordForm = ({ customerId }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="bg-[#1f2d47] p-4 rounded-lg shadow mt-6 text-white">
+      <form onSubmit={async (e) => {
+        await handleSubmit(e);
+        if (onCustomerCreated) onCustomerCreated();
+      }} className="bg-[#1f2d47] p-4 rounded-lg shadow mt-6 text-white">
         <h3 className="text-lg font-semibold mb-4">Add Record</h3>
         <select
           value={type}
@@ -226,25 +231,26 @@ const RecordForm = ({ customerId }) => {
           Add Record
         </button>
       </form>
-
-      <div className="mt-6">
-        <h3 className="text-lg font-semibold mb-2 text-white">Transaction History</h3>
-        {transactions.map((transaction) => (
-          <div key={transaction._id} className="bg-[#1f2d47] p-4 rounded mb-3 text-white">
-            <p>Date: {new Date(transaction.date).toLocaleDateString()}</p>
-            <p>Total: ${transaction.totalAmount}</p>
-            <p>Paid: ${transaction.paidAmount}</p>
-            <p>Remaining: ${transaction.remainingAmount}</p>
-            <p>Type: {transaction.transactionType}</p>
-            <p>Product(s):</p>
-            <ul className="list-disc list-inside">
-              {transaction.products.map((product, index) => (
-                <li key={index}>{product.name}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
+      {!hideHistory && (
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold mb-2 text-white">Transaction History</h3>
+          {transactions.map((transaction) => (
+            <div key={transaction._id} className="bg-[#1f2d47] p-4 rounded mb-3 text-white">
+              <p>Date: {new Date(transaction.date).toLocaleDateString()}</p>
+              <p>Total: ${transaction.totalAmount}</p>
+              <p>Paid: ${transaction.paidAmount}</p>
+              <p>Remaining: ${transaction.remainingAmount}</p>
+              <p>Type: {transaction.transactionType}</p>
+              <p>Product(s):</p>
+              <ul className="list-disc list-inside">
+                {transaction.products.map((product, index) => (
+                  <li key={index}>{product.name}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
