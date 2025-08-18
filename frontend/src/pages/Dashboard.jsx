@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore2';
+import BackForwardNav from '../components/BackForwardNav';
 
 const Dashboard = () => {
   const { logout } = useAuthStore();
 
   return (
+    <>
+    <BackForwardNav />
     <div className="min-h-screen bg-[#172542] p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold bg-gradient-to-r from-[#7d98d1] to-[#282354] text-transparent bg-clip-text">
@@ -35,6 +38,7 @@ const Dashboard = () => {
         </Link>
       </div>
     </div>
+    </>
   );
 };
 

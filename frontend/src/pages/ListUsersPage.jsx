@@ -7,6 +7,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ListUsersPage = () => {
   const [users, setUsers] = useState([]);
+  const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,8 +22,17 @@ const ListUsersPage = () => {
     <div className="p-6 bg-[#172542] min-h-screen text-white">
   <BackForwardNav />
   <h2 className="text-2xl font-bold mb-4">List Users</h2>
+      <div className="max-w-md mx-auto mt-6 mb-6">
+        <input
+          type="text"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+          placeholder="Search user by name..."
+          className="w-full p-3 rounded-lg border border-gray-600 bg-[#1f2d47] text-white placeholder-gray-400 shadow"
+        />
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        {users.map((user) => (
+        {users.filter(user => user.name.toLowerCase().includes(search.toLowerCase())).map((user) => (
           <div
             key={user._id}
             className={`border p-4 rounded-lg cursor-pointer bg-[#1f2d47] shadow hover:bg-[#282354] transition border-gray-600`}

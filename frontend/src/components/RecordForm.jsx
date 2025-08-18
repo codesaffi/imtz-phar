@@ -131,8 +131,14 @@ import axios from 'axios';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-const RecordForm = ({ customerId, onCustomerCreated, hideHistory = false }) => {
-  const [type, setType] = useState('purchase');
+const RecordForm = ({ customerId, userType = 'customer', onCustomerCreated, hideHistory = false }) => {
+  // Determine allowed transaction type(s)
+  let allowedTypes = [];
+  if (userType === 'customer') allowedTypes = ['sale'];
+  else if (userType === 'vendor') allowedTypes = ['purchase'];
+  else allowedTypes = ['purchase', 'sale'];
+
+  const [type, setType] = useState(allowedTypes[0]);
   const [productName, setProductName] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [date, setDate] = useState('');
@@ -193,9 +199,10 @@ const RecordForm = ({ customerId, onCustomerCreated, hideHistory = false }) => {
           value={type}
           onChange={(e) => setType(e.target.value)}
           className="w-full p-2 mb-3 bg-[#172542] border border-gray-600 rounded text-white"
+          disabled={allowedTypes.length === 1}
         >
-          <option value="purchase">Purchase</option>
-          <option value="sale">Sale</option>
+          {allowedTypes.includes('purchase') && <option value="purchase">Purchase</option>}
+          {allowedTypes.includes('sale') && <option value="sale">Sale</option>}
         </select>
         <input
           type="text"

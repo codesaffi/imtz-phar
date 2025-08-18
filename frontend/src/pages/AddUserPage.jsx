@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CustomerForm from '../components/CustomerForm';
+import BackForwardNav from '../components/BackForwardNav';
 
 const AddUserPage = () => {
   const [success, setSuccess] = useState(false);
@@ -12,7 +13,10 @@ const AddUserPage = () => {
   };
 
   return (
+    <>
+     <BackForwardNav />
     <div className="max-w-lg mx-auto mt-10">
+         
       {success && (
         <div className="mb-4 p-3 bg-green-600 text-white rounded shadow text-center animate-fade-in">
           User created successfully!
@@ -20,6 +24,7 @@ const AddUserPage = () => {
       )}
       <CustomerForm key={formKey} onCustomerCreated={handleUserCreated} />
     </div>
+    </>
   );
 };
 

@@ -7,9 +7,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+
 const UserDetailsPage = () => {
   const { userId } = useParams();
   const [transactions, setTransactions] = useState([]);
+  const [userType, setUserType] = useState('customer');
   const [showForm, setShowForm] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formKey, setFormKey] = useState(0);
@@ -19,7 +21,12 @@ const UserDetailsPage = () => {
       const { data } = await axios.get(`${BACKEND_URL}/api/transactions/person/${userId}`);
       setTransactions(data);
     };
+    const fetchUserType = async () => {
+      const { data } = await axios.get(`${BACKEND_URL}/api/persons/${userId}`);
+      setUserType(data.type);
+    };
     fetchTransactions();
+    fetchUserType();
   }, [userId, formKey]);
 
   const handleRecordAdded = () => {
@@ -42,21 +49,34 @@ const UserDetailsPage = () => {
         {transactions.length === 0 ? (
           <p className="text-gray-300">No transactions yet.</p>
         ) : (
-          transactions.map((transaction) => (
-            <div key={transaction._id} className="bg-[#1f2d47] p-4 rounded mb-3 text-white">
-              <p>Date: {new Date(transaction.date).toLocaleDateString()}</p>
-              <p>Total: ${transaction.totalAmount}</p>
-              <p>Paid: ${transaction.paidAmount}</p>
-              <p>Remaining: ${transaction.remainingAmount}</p>
-              <p>Type: {transaction.transactionType}</p>
-              <p>Product(s):</p>
-              <ul className="list-disc list-inside">
-                {transaction.products.map((product, index) => (
-                  <li key={index}>{product.name}</li>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-[#1f2d47] rounded-lg shadow text-white">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 border-b border-gray-600">Product Name</th>
+                  <th className="px-4 py-2 border-b border-gray-600">Type</th>
+                  <th className="px-4 py-2 border-b border-gray-600">Date</th>
+                  <th className="px-4 py-2 border-b border-gray-600">Total</th>
+                  <th className="px-4 py-2 border-b border-gray-600">Paid</th>
+                  <th className="px-4 py-2 border-b border-gray-600">Remaining</th>
+                </tr>
+              </thead>
+              <tbody>
+                {transactions.map((transaction) => (
+                  transaction.products.map((product, idx) => (
+                    <tr key={transaction._id + '-' + idx} className="hover:bg-[#282354] transition text-center">
+                      <td className="px-4 py-2 border-b border-gray-700 text-center">{product.name}</td>
+                      <td className="px-4 py-2 border-b border-gray-700 text-center">{transaction.transactionType}</td>
+                      <td className="px-4 py-2 border-b border-gray-700 text-center">{new Date(transaction.date).toLocaleDateString()}</td>
+                      <td className="px-4 py-2 border-b border-gray-700 text-center">${transaction.totalAmount}</td>
+                      <td className="px-4 py-2 border-b border-gray-700 text-center">${transaction.paidAmount}</td>
+                      <td className="px-4 py-2 border-b border-gray-700 text-center">${transaction.remainingAmount}</td>
+                    </tr>
+                  ))
                 ))}
-              </ul>
-            </div>
-          ))
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
       <div className="flex justify-center mt-8">
@@ -83,7 +103,7 @@ const UserDetailsPage = () => {
               transition={{ duration: 0.3 }}
               className="bg-[#1f2d47] p-8 rounded-lg shadow-xl w-full max-w-md"
             >
-              <RecordForm key={formKey} customerId={userId} onCustomerCreated={handleRecordAdded} hideHistory={true} />
+              <RecordForm key={formKey} customerId={userId} userType={userType} onCustomerCreated={handleRecordAdded} hideHistory={true} />
               <button
                 className="mt-4 w-full bg-gray-600 hover:bg-gray-700 text-white py-2 rounded"
                 onClick={() => setShowForm(false)}
